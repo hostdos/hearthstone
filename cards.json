@@ -1,0 +1,7 @@
+{"meta":{"patch":"1.0.0.4243","last_updated":"19.12.2013","updated_by":"@philippdyck"},"cards":[
+{"id":1,"name":"Garrosh Hellscream","description":"","image":".\/res\/miracle_card.png","class":"warrior","type":"hero","quality":"epic","race":"none","set":"expert","mana":0,"attack":null,"health":30,"collectible":true,"effect_list":[]},
+{"id":2,"name":"Garrosh Hellscream","description":"","image":".\/res\/mirrari_card.png","class":"warrior","type":"hero","quality":"legendary","race":"none","set":"expert","mana":0,"attack":null,"health":30,"collectible":true,"effect_list":[]},
+{"id":3,"name":"Garrosh Hellscream","description":"","image":".\/res\/fake_card.png","class":"warrior","type":"hero","quality":"legendary","race":"none","set":"expert","mana":0,"attack":null,"health":30,"collectible":true,"effect_list":[]},
+{"id":4,"name":"Garrosh Hellscream","description":"","image":".\/res\/alesh_card.png","class":"warrior","type":"hero","quality":"legendary","race":"none","set":"expert","mana":0,"attack":null,"health":30,"collectible":true,"effect_list":[]},
+{"id":5,"name":"Garrosh Hellscream","description":"","image":"http:\/\/wow.zamimg.com\/images\/hearthstone\/cards\/enus\/medium\/HERO_01.png","class":"warrior","type":"hero","quality":"legendary","race":"none","set":"expert","mana":0,"attack":null,"health":30,"collectible":true,"effect_list":[]}
+]}

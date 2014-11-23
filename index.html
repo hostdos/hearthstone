@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://forums.nurfed.com/hearthstone/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    
+	    <title>Nurfed Packfest</title>
+		<link rel="shortcut icon" type="image/x-icon" href="http://forums.nurfed.com/hearthstone/favicon.ico">
+	    <link rel="stylesheet" type="text/css" href="./res/style.css">
+
+	    <!-- much javascript, many file, so bloat -->
+	    <script type="text/javascript" src="./res/jquery.min.js"></script>
+	    <script type="text/javascript" src="./res/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="./res/rumble.min.js"></script>
+		<script type="text/javascript" src="./res/browser.min.js"></script>
+		<!-- <script type="text/javascript" src="js/sparkles.js"></script> -->
+		<!-- <script type="text/javascript" src="js/trail.js"></script> -->
+		<script type="text/javascript" src="./res/functions.js"></script>
+		<script type="text/javascript" src="./res/docready.js"></script>
+		<script type="text/javascript" src="./res/jquery.ui.touch-punch.min.js"></script>
+	
+		<script type="text/javascript">
+
+			var siteLoaded = false; // Global variable for determining whether the site is fully loaded
+
+        	//Tests for .ogg audio support, sets the default file type for the respective browser
+			var audioTest = new Audio(),
+				fileExt;
+			if (audioTest.canPlayType('audio/ogg')) {
+				fileExt = ".ogg";
+			} else {
+				fileExt = ".mp3";
+			}
+
+        	var allImages = { //Images to preload
+        		back_button_hover: 		'img/back_button_hover.jpg',
+        		bg: 					'img/bg.jpg',
+        		bg_frame: 				'img/bg_frame.png',
+        		bg_glow: 				'img/bg_glow.jpg',
+        		donation: 				'img/donation.png',
+        		done: 					'img/done.png',
+        		pack: 					'img/pack.png',
+        		friend_button_hover: 	'img/friend_button_hover.jpg',
+        		friend_list: 			'img/friend_list.png',
+        		mancer_tooltip: 		'img/mancer_tooltip.png',
+        		stats_button_hover: 	'img/stats_button_hover.jpg',
+        		stats_panel: 			'img/stats_panel.png'
+        	},
+			allAudio = { //Audio to preload
+				announcer_epic: 			'audio/announcer_epic' + fileExt,
+				announcer_golden_common: 	'audio/announcer_golden_common' + fileExt,
+				announcer_golden_epic: 		'audio/announcer_golden_epic' + fileExt,
+				announcer_golden_legendary: 'audio/announcer_golden_legendary' + fileExt,
+				announcer_golden_rare: 		'audio/announcer_golden_rare' + fileExt,
+				announcer_legendary: 		'audio/announcer_legendary' + fileExt,
+				announcer_rare: 			'audio/announcer_rare' + fileExt,
+				card_hover: 				'audio/card_hover' + fileExt,
+				card_turn_over_common: 		'audio/card_turn_over_common' + fileExt,
+				card_turn_over_epic: 		'audio/card_turn_over_epic' + fileExt,
+				card_turn_over_legendary: 	'audio/card_turn_over_legendary' + fileExt,
+				card_turn_over_rare: 		'audio/card_turn_over_rare' + fileExt,
+				card_unhover: 				'audio/card_unhover' + fileExt,
+				done_fade: 					'audio/done_fade' + fileExt,
+				done_reveal: 				'audio/done_reveal' + fileExt,
+				menu_button_hover: 			'audio/menu_hover' + fileExt,
+				menu_open: 					'audio/menu_open' + fileExt,
+				pack_aura: 					'audio/pack_aura' + fileExt,
+				pack_grab: 					'audio/pack_grab' + fileExt,
+				pack_open: 					'audio/pack_open' + fileExt,
+				pack_release: 				'audio/pack_release' + fileExt,
+				pack_shake: 				'audio/pack_shake' + fileExt,
+				shop_button_hover: 			'audio/shop_hover' + fileExt,
+				shop_open: 					'audio/shop_open' + fileExt,
+				shop_close: 				'audio/shop_close' + fileExt
+			},
+			filesToLoad = Object.keys(allImages).length + Object.keys(allAudio).length, //Number of files to load
+			filesLoaded = 0; // Files currently loaded
+
+	        $(window).on("load", function() { //Ensures all assets are loaded before displaying the site
+
+				function preloadImages(images) {
+					for (var key in images) {
+						if (images.hasOwnProperty(key)) {
+							loadImage(images[key]);
+						}
+					}
+				}
+				function loadImage(uri) {
+					var img = new Image();
+					img.onload = isFileLoaded;
+					img.src = uri;
+				}
+				function preloadAudio(sounds) {
+					for (var key in sounds) {
+						if (sounds.hasOwnProperty(key)) {
+							loadAudio(sounds[key]);
+						}
+					}
+				}
+				function loadAudio(uri) {
+				    var audio = new Audio();
+				    audio.addEventListener('canplaythrough', isFileLoaded, false);
+				    audio.src = uri;
+				}
+				function isFileLoaded() {
+					filesLoaded++;
+				    if (filesLoaded >= filesToLoad) {
+				    	loadSite();
+			    	}
+				}
+				
+				preloadImages(allImages);
+				preloadAudio(allAudio);
+
+				function loadSite() {
+					if (!siteLoaded) {
+			            $('#status').fadeOut(); //Fade out the loading screen animation
+			            $('#preloader').delay(350).fadeOut('slow'); //Fade out the rest of the loading screen DIV
+			            $('body').delay(350).css({'overflow':'visible'});
+		        	}
+		            siteLoaded = true;
+				}
+
+	        });
+
+			//Ensures the site loads regardless
+			var timeOut = setTimeout(function() {
+	            $('#status').fadeOut(); //Fade out the loading screen animation
+	            $('#preloader').delay(350).fadeOut('slow'); //Fade out the rest of the loading screen DIV
+	            $('body').delay(350).css({'overflow':'visible'});
+	            siteLoaded = true;
+			}, 2500);
+
+		</script>
+	</head>
+	<body style="overflow: visible;"><div id="StayFocusd-infobar" style="display:none;">
+    <img src="chrome-extension://laankejkbhbdhmipfmgcngdelahlfoji/common/img/eye_19x19_red.png">
+    <span id="StayFocusd-infobar-msg"></span>
+    <span id="StayFocusd-infobar-links">
+        <a id="StayFocusd-infobar-never-show">hide forever</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a id="StayFocusd-infobar-hide">hide once</a>
+    </span>
+</div>
+
+		<!-- Preloader -->
+		<div id="preloader" style="display: none;">
+		    <div id="status" style="display: none;">&nbsp;</div>
+		</div>
+
+		<!-- Outer frame and wrapper/background -->
+		<div id="frame"></div>
+		<div id="wrapper" style="cursor: url(http://forums.nurfed.com/hearthstone/img/click.png), auto;">
+
+			<video id="pack_burst" preload="auto">
+	    		<source src="video/pack_burst.webm" type="video/webm">
+	    		<source src="video/pack_burst.mp4" type="video/mp4">
+	 		</video>
+
+			<!-- Layered glow and blur backgrounds -->
+			<div id="bg_glow"></div>
+			<div id="bg"></div>
+			<div id="bg_blur"></div>
+
+			<!-- Pack stuff -->
+			<div id="pack_wrap">
+				<div id="pack" class="ui-draggable"></div>
+			</div>
+			<!-- <div id="pack_infi"></div> -->
+			<div id="pack_hole" class="ui-droppable"></div>
+
+			<!-- Friend menu -->
+			<!--
+			
+			<div id="friend_button"></div>
+			<div id="friend_list">
+				<div id="mancer"></div>
+			</div>
+			<div id="mancer_tooltip"></div>
+			
+			-->
+
+			<!-- Shop/donation menu -->
+			<a href="http://www.esportclothing.com/shop/team-store/myinsanity-player-jersey-2014/" target="blank">
+			<div id="shop_button"></div>
+			</a>
+
+			<!-- <a href="#" target="_blank"> --> <div id="donation"></div> <!-- </a> -->
+
+			<!-- Volume control -->
+			<section>
+				<span class="tooltip"></span>
+				<div id="volume">
+					<div id="slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 50%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://forums.nurfed.com/hearthstone/#" style="left: 50%;"></a></div>
+				</div>
+				<span class="speaker"></span>
+			</section>
+
+			<!-- Back button and gold hover tooltip -->
+			<a href="http://www.myinsanity.eu/" target="_blank"><div id="back_button"></div></a>
+			
+			<!--
+			<div id="gold"></div>
+			<div id="gold_tooltip"></div>
+			-->
+
+			<!-- Card statistics -->
+			<div id="stats_button"></div>
+			<div id="stats_tooltip"></div>
+			<div id="stats_panel">
+				<div id="damn_lies">
+					<a href="http://forums.nurfed.com/hearthstone/" style="color:#fefefe">Original Pack opener</a> created by Deek.
+					Modified by mYinsanity 
+					for the sole use of a
+					Hearthstone announcement.
+					<a href="www.myinsanity.eu" target="blank" style="color:#fefefe"> Announcement News</a>
+				</div>
+				<!--
+				<div id="damn_lies">Common: <span class="right">0 (0%)</span><br>Gold Common: <span class="right">0 (0%)</span><br>Rare: <span class="right">0 (0%)</span><br>Gold Rare: <span class="right">0 (0%)</span><br>Epic: <span class="right">0 (0%)</span><br>Gold Epic: <span class="right">0 (0%)</span><br>Legendary: <span class="right">0 (0%)</span><br>Gold Legendary: <span class="right">0 (0%)</span><br>Total Cards: <span class="right">0</span><br>Total Packs: <span class="right">0</span><br>Total Dust: <span class="right">0</span><br>Total Money: <span class="right">0</span><br>Time Spent: <span class="right">00:08:15</span><br></div>
+				-->
+			</div>
+
+			<!-- Card particles -->
+			<canvas id="particles"></canvas>
+
+			<!-- Cards -->
+			<div id="card_1" class="container">
+			  <div class="card">
+			  	<div class="card_glow"></div>
+			    <div class="card_front">
+			      <img class="card_face" src="./res/EX1_245.png" alt="Card Front">
+			    </div>
+			    <div class="card_back">
+			      <img src="./res/card_back.png" alt="Card Back">
+			    </div>
+			  </div>
+			</div>
+
+			<div id="card_2" class="container">
+			  <div class="card">
+			  	<div class="card_glow"></div>
+			    <div class="card_front">
+			      <img class="card_face" src="./res/EX1_405.png" alt="Card Front">
+			    </div>
+			    <div class="card_back">
+			      <img src="./res/card_back.png" alt="Card Back">
+			    </div>
+			  </div>
+			</div>
+
+			<div id="card_3" class="container">
+			  <div class="card">
+			  	<div class="card_glow"></div>
+			    <div class="card_front">
+			      <img class="card_face" src="./res/EX1_398.png" alt="Card Front">
+			    </div>
+			    <div class="card_back">
+			      <img src="./res/card_back.png" alt="Card Back">
+			    </div>
+			  </div>
+			</div>
+
+			<div id="card_4" class="container">
+			  <div class="card">
+			  	<div class="card_glow"></div>
+			    <div class="card_front">
+			      <img class="card_face" src="./res/EX1_363.png" alt="Card Front">
+			    </div>
+			    <div class="card_back">
+			      <img src="./res/card_back.png" alt="Card Back">
+			    </div>
+			  </div>
+			</div>
+
+			<div id="card_5" class="container">
+			  <div class="card">
+			  	<div class="card_glow"></div>
+			    <div class="card_front">
+			      <img class="card_face" src="./res/EX1_597.png" alt="Card Front">
+			    </div>
+			    <div class="card_back">
+			      <img src="./res/card_back.png" alt="Card Back">
+			    </div>
+			  </div>
+			</div>
+			<!-- End cards -->
+
+			<!-- Done button -->
+			<a href="www.myinsanity.eu" target="blank">
+				<div id="done"></div>
+			</a>
+
+		<!-- End #wrapper -->
+		</div>
+
+		<!-- Particle explosions
+		<script type="text/javascript" src="js/proton.min.js"></script>
+		<script type="text/javascript" src="js/particles.js"></script>
+		-->
+
+		<!-- Alert overlay for shitty browsers -->
+	    <div id="alert" style="display: none;">
+	      <div id="dimmer"></div>
+	      <p id="message">
+	        <span id="text">USE FIREFOX OR CHROME;</span><br>
+	        <span id="subtext">THEY PROVIDE THE BEST EXPERIENCE.</span><br>
+	        <br>
+	        <input type="submit" value="OK" id="OK">
+	      </p>
+	    </div>
+
+	
+</body></html>
